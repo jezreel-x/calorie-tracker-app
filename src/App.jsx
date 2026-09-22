@@ -1,25 +1,14 @@
-import NutritionMeter from './NutritionMeter';
+import NutritionMeter from "./NutritionMeter";
+import useThemeMode from "./hooks/useThemeMode";
 
 function App() {
+  const { mode, toggle } = useThemeMode();
+
   return (
-    <div className="bg-gray-100 min-h-screen">
-      {/*
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      */}
-      <NutritionMeter />
+    // Top-aligned rather than centred: a centred card would drift down the
+    // page as the food list grows.
+    <div className="flex min-h-screen items-start justify-center bg-canvas px-4 py-6 sm:px-6 sm:py-12">
+      <NutritionMeter mode={mode} onToggleTheme={toggle} />
     </div>
   );
 }

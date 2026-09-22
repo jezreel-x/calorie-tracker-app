@@ -16,8 +16,8 @@ describe("first visit", () => {
   it("seeds the sample foods when no entries have ever been stored", () => {
     renderMeter();
 
-    expect(screen.getByText("Apple")).toBeInTheDocument();
-    expect(screen.getByText("Orange")).toBeInTheDocument();
+    expect(screen.getByText(/greek yoghurt/i)).toBeInTheDocument();
+    expect(screen.getByText(/almonds/i)).toBeInTheDocument();
   });
 });
 
@@ -33,7 +33,7 @@ describe("persistence", () => {
     renderMeter();
 
     expect(screen.getByText("Porridge")).toBeInTheDocument();
-    expect(screen.queryByText("Apple")).not.toBeInTheDocument();
+    expect(screen.queryByText(/greek yoghurt/i)).not.toBeInTheDocument();
   });
 
   it("leaves a deliberately cleared list empty instead of reseeding it", async () => {
@@ -44,13 +44,13 @@ describe("persistence", () => {
 
     // The rows stay mounted until their exit animation finishes collapsing
     // them, so this waits rather than asserting straight away.
-    await waitForElementToBeRemoved(() => screen.queryByText("Apple"));
+    await waitForElementToBeRemoved(() => screen.queryByText(/greek yoghurt/i));
 
     // An empty array is a decision; only a missing key means "first visit".
     unmount();
     renderMeter();
 
-    expect(screen.queryByText("Apple")).not.toBeInTheDocument();
+    expect(screen.queryByText(/greek yoghurt/i)).not.toBeInTheDocument();
     expect(screen.getByText(/nothing logged yet/i)).toBeInTheDocument();
   });
 

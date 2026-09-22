@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrashCan, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPen,
+  faTrashCan,
+  faPlus,
+  faMinus,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 import { MACROS } from "../constants/nutrition";
 import { draftErrors, draftToItem, itemToDraft } from "../utils/draft";
+import { energyMismatch } from "../utils/energy";
 import {
   destructiveGhostClass,
   fieldClass,
@@ -22,6 +29,15 @@ const FoodItem = ({ item, onUpdate, onRemove, onQuantityChange }) => {
 
   const errors = draftErrors(draft);
   const canSave = Object.keys(errors).length === 0;
+
+  // Checked per serving rather than per row, so the hint doesn't come and go
+  // as the quantity changes.
+  const mismatch = energyMismatch(item);
+  const mismatchNote = mismatch
+    ? `The macros add up to about ${formatNumber(mismatch.derived)} cal, not ${formatNumber(
+        mismatch.logged
+      )}. Worth checking the serving size.`
+    : "";
 
   // Reset the draft from the saved values, so cancelling discards edits and
   // reopening never shows a stale draft.
@@ -121,11 +137,22 @@ const FoodItem = ({ item, onUpdate, onRemove, onQuantityChange }) => {
         </dl>
       </div>
 
-      <p className="mr-auto whitespace-nowrap text-sm sm:mr-0">
+      <p className="mr-auto flex items-center gap-1.5 whitespace-nowrap text-sm sm:mr-0">
         <span className="font-semibold tabular-nums text-ink">
           {formatNumber(item.calories * item.quantity)}
-        </span>{" "}
+        </span>
         <span className="text-ink-muted">cal</span>
+        {mismatch && (
+          // The shape carries the signal, and the accessible name carries the
+          // detail — the colour is doing neither job on its own.
+          <FontAwesomeIcon
+            icon={faTriangleExclamation}
+            className="text-warning"
+            title={mismatchNote}
+            aria-label={mismatchNote}
+            role="img"
+          />
+        )}
       </p>
 
       <div className="flex items-center gap-1.5">

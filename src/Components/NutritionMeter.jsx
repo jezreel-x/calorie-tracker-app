@@ -9,11 +9,17 @@ import { macroEnergySplit, totalsFor } from "../utils/totals";
 
 const STORAGE_KEY = "nutrition-meter:items";
 
-const SEED_ITEMS = [
-  { id: "seed-apple", name: "Apple", calories: 52, protein: 0.26, carbs: 14, fat: 1, quantity: 1 },
-  { id: "seed-banana", name: "Banana", calories: 89, protein: 1.09, carbs: 23, fat: 5, quantity: 1 },
-  { id: "seed-grapes", name: "Grapes", calories: 40, protein: 0.2, carbs: 20, fat: 2, quantity: 1 },
-  { id: "seed-orange", name: "Orange", calories: 35, protein: 0.15, carbs: 25, fat: 4, quantity: 1 },
+// A plausible breakfast rather than four fruits. The previous sample figures
+// were not nutritionally possible — an orange logged at 35 cal carried 25g of
+// carbs, which is 100 cal on its own — so the breakdown bar rendered a plate
+// that was 75% carbohydrate and 1% protein and looked broken while being
+// arithmetically correct. These are real serving figures, and each one's
+// macros reconcile with its calories to within the fibre gap.
+export const SEED_ITEMS = [
+  { id: "seed-yoghurt", name: "Greek yoghurt (170g)", calories: 100, protein: 17, carbs: 6, fat: 0.7, quantity: 1 },
+  { id: "seed-oats", name: "Rolled oats (40g)", calories: 150, protein: 5, carbs: 27, fat: 2.5, quantity: 1 },
+  { id: "seed-banana", name: "Banana (medium)", calories: 105, protein: 1.3, carbs: 27, fat: 0.4, quantity: 1 },
+  { id: "seed-almonds", name: "Almonds (28g)", calories: 164, protein: 6, carbs: 6, fat: 14, quantity: 1 },
 ];
 
 const loadItems = () => {

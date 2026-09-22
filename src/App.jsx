@@ -1,4 +1,4 @@
-import NutritionMeter from "./NutritionMeter";
+import NutritionMeter from "./Components/NutritionMeter";
 import useThemeMode from "./hooks/useThemeMode";
 
 function App() {

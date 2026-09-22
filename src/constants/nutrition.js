@@ -12,10 +12,14 @@ export const CALORIES_PER_GRAM = {
 
 // The only chromatic identity in the app. `dot` is for the chip that rides
 // beside a figure; `fill` is for the mark itself. The figure stays in ink.
+//
+// `short` exists because a row has no room for the legend: three dots and
+// three numbers would leave hue as the only thing telling protein from fat,
+// which is precisely what the colour work was meant to avoid.
 export const MACROS = [
-  { key: "protein", label: "Protein", dot: "bg-protein", fill: "var(--app-protein)" },
-  { key: "carbs", label: "Carbs", dot: "bg-carbs", fill: "var(--app-carbs)" },
-  { key: "fat", label: "Fat", dot: "bg-fat", fill: "var(--app-fat)" },
+  { key: "protein", label: "Protein", short: "P", dot: "bg-protein", fill: "var(--app-protein)" },
+  { key: "carbs", label: "Carbs", short: "C", dot: "bg-carbs", fill: "var(--app-carbs)" },
+  { key: "fat", label: "Fat", short: "F", dot: "bg-fat", fill: "var(--app-fat)" },
 ];
 
 export const EMPTY_DRAFT = {

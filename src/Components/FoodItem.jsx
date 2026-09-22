@@ -114,7 +114,7 @@ const FoodItem = ({ item, onUpdate, onRemove, onQuantityChange }) => {
           {MACROS.map((macro) => (
             <div key={macro.key} className="flex items-center gap-1.5">
               <span className={`size-2 shrink-0 rounded-full ${macro.dot}`} aria-hidden="true" />
-              <dt className="sr-only">{macro.label}</dt>
+              <dt aria-label={macro.label}>{macro.short}</dt>
               <dd className="tabular-nums">{formatGrams(item[macro.key] * item.quantity)}</dd>
             </div>
           ))}

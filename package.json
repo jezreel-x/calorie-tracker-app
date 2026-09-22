@@ -14,7 +14,9 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "browserslist": {
     "production": [
@@ -30,8 +32,13 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.13",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
     "@vitejs/plugin-react": "^5.0.2",
+    "jsdom": "^30.1.1",
     "tailwindcss": "^4.1.13",
-    "vite": "^7.1.5"
+    "vite": "^7.1.5",
+    "vitest": "^5.0.1"
   }
 }
